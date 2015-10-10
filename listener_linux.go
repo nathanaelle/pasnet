@@ -1,6 +1,6 @@
 // +build linux
 
-package	hatcp
+package pasnet	// import "github.com/nathanaelle/pasnet"
 
 import	(
 	"syscall"
@@ -35,6 +35,14 @@ func ka_intvl(fd int, d time.Duration) error {
 
 func ka_count(fd int, n int) error {
 	return os.NewSyscallError("ka_count", syscall.SetsockoptInt(fd, syscall.IPPROTO_TCP, syscall.TCP_KEEPCNT, n))
+}
+
+func so_rcvbuf(fd int, n int) error {
+	return os.NewSyscallError("so_rcvbuf", syscall.SetsockoptInt(fd, syscall.SOL_SOCKET, syscall.SO_RCVBUF, n))
+}
+
+func so_sndbuf(fd int, n int) error {
+	return os.NewSyscallError("so_sndbuf", syscall.SetsockoptInt(fd, syscall.SOL_SOCKET, syscall.SO_SNDBUF, n))
 }
 
 func so_nodelay(fd int, flag bool) error {

@@ -1,4 +1,4 @@
-package hatcp
+package pasnet	// import "github.com/nathanaelle/pasnet"
 
 import	(
 	"net"
