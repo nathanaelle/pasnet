@@ -90,9 +90,6 @@ func generic_Dialer( generic_create func() (int,error), generic_connect func(int
 		return -1, err
 	}
 	err = gatling_run( gatling{
-		{ bullet_bool(so_reuseaddr)	, true		},
-		{ bullet_bool(so_reuseport)	, true		},
-		{ bullet_bool(so_fastopen)	, true		},
 		{ bullet_duration(ka_idle)	, 10*time.Second},
 		{ bullet_duration(ka_intvl)	, 5*time.Second	},
 		{ bullet_int(ka_count)		, 10		},
