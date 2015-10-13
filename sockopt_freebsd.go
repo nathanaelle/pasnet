@@ -44,6 +44,6 @@ func so_reuseport(fd int, flag bool) error {
 	return os.NewSyscallError("so_reuseport", syscall.SetsockoptInt(fd, syscall.SOL_SOCKET, syscall.SO_REUSEPORT, boolint(flag)) )
 }
 
-func so_fastopen(fd int, flag bool) error {
+func so_fastopen(fd int, n int) error {
 	return nil
 }
