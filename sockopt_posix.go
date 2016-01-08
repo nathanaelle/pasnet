@@ -8,6 +8,14 @@ import	(
 	"os"
 )
 
+func tcp4_socket() (int,error){
+	return syscall.Socket(syscall.AF_INET, syscall.SOCK_STREAM, syscall.IPPROTO_TCP)
+}
+
+func tcp6_socket() (int,error){
+	return syscall.Socket(syscall.AF_INET6, syscall.SOCK_STREAM, syscall.IPPROTO_TCP)
+}
+
 func so_rcvbuf(fd int, n int) error {
 	return os.NewSyscallError("so_rcvbuf", syscall.SetsockoptInt(fd, syscall.SOL_SOCKET, syscall.SO_RCVBUF, n))
 }
