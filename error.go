@@ -5,27 +5,38 @@ import	(
 )
 
 
-const	(
-	Err_Unsupported_Proto		int = iota
+
+
+type	(
+
+	PasNetError		interface {
+		error
+	}
+
+	E_UnknownProto		struct {
+		Proto	string
+	}
+
+	E_UnknownSocksVersion	struct {
+		Version	int
+	}
+
+	E_MissingArgument	struct {
+		Arg, Type	string
+	}
+
+
 )
 
 
-type	HaTcpErr	struct {
-	EType	int
-	Proto	string
+func (e *E_UnknownProto)	Error()	string	{
+	return	fmt.Sprintf("Unknown proto %s", e.Proto )
 }
 
-
-func (e HaTcpErr)Error()string  {
-	err	:= ""
-	switch e.EType {
-		case	Err_Unsupported_Proto:
-			err	= fmt.Sprintf("Unknown proto %s", e.Proto )
-	}
-	return	err
+func (e *E_UnknownSocksVersion)	Error()	string	{
+	return	fmt.Sprintf("Unknown SOCKS version %d", e.Version )
 }
 
-
-func unknown_proto(p string) error  {
-	return HaTcpErr { Err_Unsupported_Proto, p }
+func (e *E_MissingArgument)	Error()	string	{
+	return	fmt.Sprintf("Missing Non nil Argument %s %s", e.Arg, e.Type )
 }
